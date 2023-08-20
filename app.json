@@ -1,13 +1,17 @@
 {
-  "expo": {
-    "scheme": "acme",
-    "web": {
-      "bundler": "metro"
-    },
-    "plugins": [
-      "expo-router"
-    ],
-    "name": "bottleneck-native",
-    "slug": "bottleneck-native"
-  }
+    "expo": {
+        "name": "Bottleneck",
+        "slug": "bottleneck-native",
+        "scheme": "acme",
+        "web": {
+            "bundler": "metro"
+        },
+        "plugins": [
+            "expo-router"
+        ],
+        "splash": {
+            "image": "./public/splash.jpg",
+            "resizeMode": "cover"
+        }
+    }
 }
