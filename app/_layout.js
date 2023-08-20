@@ -1,12 +1,17 @@
 import { View, StyleSheet, StatusBar } from "react-native"
 import { Slot } from "expo-router"
+import { Provider } from "react-redux"
 import { colors } from "../colors"
 
+import store from "../store"
+
 const Layout = () => {
-    return (<View style={styles.container}>
+    return (<Provider store={store}>
         <StatusBar barStyle='light-content' />
-        <Slot />
-    </View>)
+        <View style={styles.container}>
+            <Slot />
+        </View>
+    </Provider>)
 }
 
 const styles = StyleSheet.create({
