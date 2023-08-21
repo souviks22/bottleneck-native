@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     line: {
         height: 1,
-        width: '45%',
+        width: '40%',
         backgroundColor: colors.dark
     }
 })

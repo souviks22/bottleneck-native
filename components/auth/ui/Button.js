@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        padding: 15,
         borderRadius: 50,
         borderWidth: 1,
         marginBottom: 15
@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15
     },
     label: {
-        fontSize: 20,
-        fontWeight: 'bold'
+        fontSize: 20
     }
 })
 

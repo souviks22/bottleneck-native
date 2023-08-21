@@ -1,14 +1,20 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { colors } from "../../../colors"
 
 const Footer = () => {
     return (<View style={styles.footer}>
         <Text style={styles.plain}>By signing up, you agree to the </Text>
-        <Text style={styles.highlighted}>Terms of Service</Text>
+        <TouchableOpacity>
+            <Text style={styles.highlighted}>Terms of Service</Text>
+        </TouchableOpacity>
         <Text style={styles.plain}> and </Text>
-        <Text style={styles.highlighted}>Privacy Policy,</Text>
+        <TouchableOpacity>
+            <Text style={styles.highlighted}>Privacy Policy,</Text>
+        </TouchableOpacity>
         <Text style={styles.plain}> including </Text>
-        <Text style={styles.highlighted}>Cookie Use.</Text>
+        <TouchableOpacity>
+            <Text style={styles.highlighted}>Cookie Use.</Text>
+        </TouchableOpacity>
     </View>)
 }
 
@@ -18,7 +24,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexWrap: 'wrap',
-        bottom: 0
+        position: 'absolute',
+        bottom: 10
     },
     plain: {
         color: colors.dark

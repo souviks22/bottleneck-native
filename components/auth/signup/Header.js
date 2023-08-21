@@ -10,7 +10,8 @@ const Header = () => {
 
 const styles = StyleSheet.create({
     header: {
-        marginVertical: 30
+        marginTop: 30,
+        marginBottom: 60
     },
     explore: {
         color: colors.dark,

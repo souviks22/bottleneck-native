@@ -6,7 +6,7 @@ import Helper from "../../components/auth/ui/Helper"
 import Footer from "../../components/auth/signup/Footer"
 
 const Signup = () => {
-    return (<View>
+    return (<View style={styles.signup}>
         <Header />
         <Button
             label={'Sign up with Google'}
@@ -18,7 +18,7 @@ const Signup = () => {
         />
         <Separator />
         <Button label={'Create account'} blue />
-        <View style={styles.alternative}>
+        <View style={styles.signin}>
             <Helper label={'Already have an account?'} />
             <Button label={'Sign in'} blueLabel />
         </View>
@@ -27,8 +27,11 @@ const Signup = () => {
 }
 
 const styles = StyleSheet.create({
-    alternative: {
-        marginVertical: 30
+    signup: {
+        flex: 1
+    },
+    signin: {
+        marginTop: 30
     }
 })
 
