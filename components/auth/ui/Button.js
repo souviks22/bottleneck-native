@@ -1,12 +1,18 @@
 import { Text, Image, TouchableOpacity, StyleSheet } from "react-native"
+import { useRouter } from "expo-router"
 import { colors } from "../../../colors"
 
-const Button = ({ label, icon, blue = false, blueLabel = false }) => {
-    return (<TouchableOpacity style={{
-        ...styles.button,
-        backgroundColor: blue ? colors.blue : colors.primary,
-        borderColor: blue ? colors.primary : colors.dark
-    }}>
+const Button = ({ label, icon, href, blue = false, blueLabel = false }) => {
+    const router = useRouter()
+    const linkHandler = () => router.push(href)
+
+    return (<TouchableOpacity
+        onPress={linkHandler}
+        style={{
+            ...styles.button,
+            backgroundColor: blue ? colors.blue : colors.primary,
+            borderColor: blue ? colors.primary : colors.dark
+        }}>
         {icon && <Image
             style={styles.icon}
             source={icon}

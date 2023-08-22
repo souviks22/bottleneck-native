@@ -11,16 +11,26 @@ const Signup = () => {
         <Button
             label={'Sign up with Google'}
             icon={require('../../public/google.png')}
+            href={'/'}
         />
         <Button
             label={'Sign up with Facebook'}
             icon={require('../../public/facebook.png')}
+            href={'/'}
         />
         <Separator />
-        <Button label={'Create account'} blue />
+        <Button
+            label={'Create account'}
+            href={'/'}
+            blue
+        />
         <View style={styles.signin}>
             <Helper label={'Already have an account?'} />
-            <Button label={'Sign in'} blueLabel />
+            <Button
+                label={'Sign in'}
+                href={'/auth/signin'}
+                blueLabel
+            />
         </View>
         <Footer />
     </View>)
