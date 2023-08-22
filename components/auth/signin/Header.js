@@ -19,11 +19,13 @@ const styles = StyleSheet.create({
         marginVertical: 30
     },
     signin: {
+        color: colors.dark,
         fontSize: 25,
         fontWeight: 'bold'
     },
     signup: {
-        color: colors.blue
+        color: colors.blue,
+        fontSize: 15
     },
     helper: {
         flexDirection: 'row',
