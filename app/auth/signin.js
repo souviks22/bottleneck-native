@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native"
+import { View, Image, StyleSheet } from "react-native"
 import Header from "../../components/auth/signin/Header"
 import Input from "../../components/auth/signin/Input"
 import Separator from "../../components/auth/ui/Separator"
@@ -20,12 +20,21 @@ const Signin = () => {
             icon={require('../../public/facebook.png')}
             href={'/'}
         />
+        <Image
+            style={styles.image}
+            source={require('../../public/signin.png')}
+            resizeMode={'contain'}
+        />
     </View>)
 }
 
 const styles = StyleSheet.create({
     signin: {
         flex: 1
+    },
+    image: {
+        width: '100%',
+        height: '40%'
     }
 })
 
