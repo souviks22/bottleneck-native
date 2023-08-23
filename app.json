@@ -10,7 +10,7 @@
             "expo-router"
         ],
         "splash": {
-            "image": "./public/splash.jpg",
+            "image": "./public/splash.png",
             "resizeMode": "cover"
         }
     }

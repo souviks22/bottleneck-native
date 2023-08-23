@@ -1,25 +1,31 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { View, Text, TextInput, StyleSheet } from "react-native"
 import { colors } from "../../../colors"
 
 const Input = ({ label, onChange, secure = false }) => {
     const [isTyping, setIsTyping] = useState(false)
-    const typingHandler = () => setIsTyping(value => !value)
+    const inputRef = useRef()
+    const typingHandler = () => {
+        setIsTyping(value => !value)
+        if (isTyping) inputRef.current.blur()
+        else inputRef.current.focus()
+    }
 
     return (<View style={styles.input}>
-        <Text style={{
-            ...styles.label,
-            borderBottomWidth: isTyping ? 0 : 1,
-            paddingBottom: isTyping ? 0 : 20
-        }}
+        <Text style={styles.label}
             onPress={typingHandler}>
             {label}
         </Text>
-        {isTyping && <TextInput
-            style={styles.text}
+        <TextInput
+            ref={inputRef}
+            style={{
+                ...styles.text,
+                height: isTyping ? 'auto' : 0,
+                borderColor: isTyping ? colors.blue : colors.dark
+            }}
             onChangeText={onChange}
             secureTextEntry={secure}
-        />}
+        />
     </View>)
 }
 
@@ -29,13 +35,11 @@ const styles = StyleSheet.create({
     },
     label: {
         color: colors.dark,
-        fontSize: 17,
-        borderColor: colors.grey
+        fontSize: 17
     },
     text: {
         fontSize: 17,
         borderBottomWidth: 1,
-        borderColor: colors.grey,
         paddingVertical: 7
     }
 })
