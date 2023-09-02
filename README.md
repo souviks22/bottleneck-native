@@ -34,12 +34,12 @@ programmers
 ***
 
 **Features**
-
-i.Helps in algorithm  visualization
-ii. Allows customized user-input
-iii. Allows code customization
-iv. Provision to  request for new code
-
+'''
+git i.Helps in algorithm  visualization
+git ii. Allows customized user-input
+git iii. Allows code customization
+git iv. Provision to  request for new code
+'''
 ***
 
 
