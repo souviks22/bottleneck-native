@@ -6,6 +6,6 @@ An algorithm visualizer application that can help students to undrestand the rea
 
 ***
 **Built with**
-** <a href="https://reactnative.dev/"></a>**
+<a href="https://reactnative.dev/"></a>
 * [![React][React.js]][React-url]
  ***
