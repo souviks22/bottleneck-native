@@ -34,12 +34,15 @@ programmers
 ***
 
 **Features**
-'''
+```
 git i.Helps in algorithm  visualization
+
 git ii. Allows customized user-input
+
 git iii. Allows code customization
+
 git iv. Provision to  request for new code
-'''
+```
 ***
 
 
