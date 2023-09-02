@@ -1,3 +1,5 @@
+`#RRGGBB`
+
 **Bottleneck**
 
 **Inspiration**
