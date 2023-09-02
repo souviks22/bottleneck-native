@@ -15,7 +15,7 @@ An algorithm visualizer application that can help students to undrestand the rea
 **Problem Statement**
 
 Build an algorithm visualizer to help people understand the various DSA based algorithms and the logic behind their working.
-```
+
 ***
 
 **About**
