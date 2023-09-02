@@ -1,4 +1,4 @@
-<font color="green"> Some green text </font>
+
 
 **Bottleneck**
 
@@ -24,15 +24,15 @@ Its an innovative algorithm visualization app that simplifies the learning proce
 ***
 
 **Features**
-```
- i.Helps in algorithm  visualization
 
-ii. Allows customized user-input
+   i.Helps in algorithm  visualization
 
-iii. Allows code customization
+  ii.Allows customized user-input
 
-iv. Provision to  request for new code
-```
+ iii.Allows code customization
+
+ iv.Provision to  request for new code
+
 ***
 
 
