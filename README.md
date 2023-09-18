@@ -9,7 +9,7 @@ An algorithm visualizer application that can help students to undrestand the rea
 ***
 ### Built with
 
-<!---<a href="https://reactnative.dev/" ![Alt text](https://github.com/souviks22/bottleneck-native/blob/master/react.jpeg)></a>-->
+<a href="https://reactnative.dev/" >![Alt text](https://github.com/souviks22/bottleneck-native/blob/master/react.jpeg)</a>
 
  ***
 ### Problem Statement
