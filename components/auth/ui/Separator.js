@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet } from "react-native"
 import { colors } from "../../../colors"
 
-const Separator = () => {
-    return (<View style={styles.separator}>
+const Separator = ({ top, bottom }) => {
+    return (<View style={{
+        ...styles.separator,
+        marginTop: top ? `${top}%` : '8%',
+        marginBottom: bottom ? `${bottom}%` : '8%'
+    }}>
         <View style={styles.line} />
         <Text style={styles.or}>or</Text>
         <View style={styles.line} />
@@ -13,8 +17,7 @@ const styles = StyleSheet.create({
     separator: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 30
+        alignItems: 'center'
     },
     or: {
         paddingHorizontal: 5,

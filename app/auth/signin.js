@@ -1,3 +1,5 @@
+import { View, StyleSheet } from "react-native"
+
 import Container from "../../components/lib/Container"
 import Header from "../../components/auth/signin/Header"
 import Input from "../../components/auth/signin/Input"
@@ -10,19 +12,27 @@ const Signin = () => {
         <Header />
         <Input label={'Email Address'} onChange={() => { }} />
         <Input label={'Password'} onChange={() => { }} secure />
-        <Separator />
+        <View style={styles.actions}>
+            <Button
+                label={'Sign In'}
+                href={'/'}
+                blue
+            />
+        </View>
+        <Separator top={4} />
         <Button
             label={'Sign In with Google'}
             icon={require('../../public/google.png')}
             href={'/'}
         />
-        <Button
-            label={'Sign In with Facebook'}
-            icon={require('../../public/facebook.png')}
-            href={'/'}
-        />
         <Poster uri={require('../../public/signin.png')} />
     </Container>)
 }
+
+const styles = StyleSheet.create({
+    actions: {
+        marginTop: '5%'
+    }
+})
 
 export default Signin
