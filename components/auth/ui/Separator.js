@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     line: {
-        height: 0.3,
+        height: 0.5,
         width: '40%',
         backgroundColor: colors.dark
     }

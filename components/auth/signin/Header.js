@@ -16,7 +16,7 @@ const Header = () => {
 
 const styles = StyleSheet.create({
     header: {
-        marginVertical: 30
+        marginVertical: '7%'
     }
 })
 

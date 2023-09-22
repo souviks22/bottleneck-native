@@ -13,6 +13,7 @@ const Home = () => {
             if (!token) router.replace('/auth')
         })()
     }, [])
+    
     return (<Text style={styles.test}>Hello World</Text>)
 }
 
