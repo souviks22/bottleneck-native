@@ -1,14 +1,39 @@
-# Expo Router Example
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
 
-## 🚀 How to use
+## Bottleneck
 
-```sh
-npx create-expo-app -e with-router
-```
+### Inspiration
 
-## 📝 Notes
+An algorithm visualizer application that can help students to undrestand the real logic behind an algorithm with step-by-step visualization.The visualizers available are either inefficient or highly dependent on the user that increases the chance of error.
 
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+***
+### Built with
+
+<a href="https://reactnative.dev/" >![Alt text](https://github.com/souviks22/bottleneck-native/blob/master/react.jpeg)</a>
+
+ ***
+### Problem Statement
+
+Build an algorithm visualizer to help people understand the various DSA based algorithms and the logic behind their working.
+
+***
+
+### About
+
+Its an innovative algorithm visualization app that simplifies the learning process by visually breaking down complex algorithms. It offers step-by-step animations, logs, and customization options to help users better understand how algorithms work. Developed using React Native, Bottleneck is a cross-platform mobile application designed to enhance algorithm comprehension for both beginners and experienced programmers.
+
+***
+
+### Features
+
+   i.Helps in algorithm  visualization
+
+  ii.Allows customized user-input
+
+ iii.Allows code customization
+
+ iv.Provision to  request for new code
+
+***
+
+
