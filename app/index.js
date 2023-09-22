@@ -10,7 +10,7 @@ const Home = () => {
     useEffect(() => {
         (async () => {
             const token = await AsyncStorage.getItem('token')
-            if (!token) router.replace('/auth/signup')
+            if (!token) router.replace('/auth')
         })()
     }, [])
     return (<Text style={styles.test}>Hello World</Text>)

@@ -1,28 +1,15 @@
-import { View, Text, StyleSheet } from "react-native"
-import { colors } from "../../../colors"
+import { View, StyleSheet } from "react-native"
 
 const Header = () => {
     return (<View style={styles.header}>
-        <Text style={styles.explore}>Explore now</Text>
-        <Text style={styles.join}>Join BN today.</Text>
+        <Text style={styles.signin}>Sign Up to BN</Text>
+        <View style={styles.helper}>
+            <Helper label={'New user?'} />
+            <TouchableOpacity>
+                <Text style={styles.signup}> Create an account</Text>
+            </TouchableOpacity>
+        </View>
     </View>)
 }
-
-const styles = StyleSheet.create({
-    header: {
-        marginTop: 30,
-        marginBottom: 60
-    },
-    explore: {
-        color: colors.dark,
-        fontSize: 50,
-        fontWeight: 'bold',
-        paddingBottom: 10
-    },
-    join: {
-        color: colors.dark,
-        fontSize: 25
-    }
-})
 
 export default Header

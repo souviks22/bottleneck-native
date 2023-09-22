@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 15,
         borderRadius: 50,
-        borderWidth: 1,
+        borderWidth: 0.5,
         marginBottom: 15
     },
     icon: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15
     },
     label: {
-        fontSize: 20
+        fontSize: 17
     }
 })
 

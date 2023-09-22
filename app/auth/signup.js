@@ -1,48 +1,11 @@
-import { View, StyleSheet } from "react-native"
-import Header from "../../components/auth/signup/Header"
-import Button from "../../components/auth/ui/Button"
-import Separator from "../../components/auth/ui/Separator"
-import Helper from "../../components/auth/ui/Helper"
-import Footer from "../../components/auth/signup/Footer"
+import Container from "../../components/lib/Container"
+import Poster from "../../components/auth/ui/Poster"
 
 const Signup = () => {
-    return (<View style={styles.signup}>
-        <Header />
-        <Button
-            label={'Sign up with Google'}
-            icon={require('../../public/google.png')}
-            href={'/'}
-        />
-        <Button
-            label={'Sign up with Facebook'}
-            icon={require('../../public/facebook.png')}
-            href={'/'}
-        />
-        <Separator />
-        <Button
-            label={'Create account'}
-            href={'/'}
-            blue
-        />
-        <View style={styles.signin}>
-            <Helper label={'Already have an account?'} />
-            <Button
-                label={'Sign in'}
-                href={'/auth/signin'}
-                blueLabel
-            />
-        </View>
-        <Footer />
-    </View>)
-}
+    return (<Container>
+        <Poster uri={require('../../public/signin.png')} />
 
-const styles = StyleSheet.create({
-    signup: {
-        flex: 1
-    },
-    signin: {
-        marginTop: 30
-    }
-})
+    </Container>)
+}
 
 export default Signup

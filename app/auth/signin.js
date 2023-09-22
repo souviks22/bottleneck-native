@@ -1,41 +1,28 @@
-import { View, Image, StyleSheet } from "react-native"
+import Container from "../../components/lib/Container"
 import Header from "../../components/auth/signin/Header"
 import Input from "../../components/auth/signin/Input"
+import Poster from "../../components/auth/ui/Poster"
 import Separator from "../../components/auth/ui/Separator"
 import Button from "../../components/auth/ui/Button"
 
 const Signin = () => {
-    return (<View style={styles.signin}>
+    return (<Container>
         <Header />
-        <Input label={'Email address'} />
+        <Input label={'Email Address'} />
         <Input label={'Password'} secure />
         <Separator />
         <Button
-            label={'Sign up with Google'}
+            label={'Sign Up with Google'}
             icon={require('../../public/google.png')}
             href={'/'}
         />
         <Button
-            label={'Sign up with Facebook'}
+            label={'Sign Up with Facebook'}
             icon={require('../../public/facebook.png')}
             href={'/'}
         />
-        <Image
-            style={styles.image}
-            source={require('../../public/signin.png')}
-            resizeMode={'contain'}
-        />
-    </View>)
+        <Poster uri={require('../../public/signin.png')} />
+    </Container>)
 }
-
-const styles = StyleSheet.create({
-    signin: {
-        flex: 1
-    },
-    image: {
-        width: '100%',
-        height: '40%'
-    }
-})
 
 export default Signin

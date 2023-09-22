@@ -35,12 +35,13 @@ const styles = StyleSheet.create({
     },
     label: {
         color: colors.dark,
-        fontSize: 17
+        fontSize: 15,
+        paddingBottom: 7
     },
     text: {
-        fontSize: 17,
-        borderBottomWidth: 1,
-        paddingVertical: 7
+        fontSize: 15,
+        borderBottomWidth: 0.5,
+        paddingBottom: 7
     }
 })
 
