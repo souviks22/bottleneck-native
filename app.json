@@ -16,7 +16,9 @@
     "extra": {
       "router": {
         "origin": false
-      }
+      },
+      "api": "http://127.0.0.1:3000",
+      "tokenKey": "bottleneck-token"
     },
     "android": {
       "package": "com.souvik.bottlenecknative"
