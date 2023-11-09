@@ -6,7 +6,7 @@ const Button = ({ label, icon, href, handler = () => { }, blue = false, blueLabe
     const router = useRouter()
     const linkHandler = () => {
         if (href) router.push(href)
-        else handler()
+        handler()
     }
 
     return (<TouchableOpacity
