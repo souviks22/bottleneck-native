@@ -1,17 +1,28 @@
 {
-    "expo": {
-        "name": "Bottleneck",
-        "slug": "bottleneck-native",
-        "scheme": "acme",
-        "web": {
-            "bundler": "metro"
-        },
-        "plugins": [
-            "expo-router"
-        ],
-        "splash": {
-            "image": "./public/splash.png",
-            "resizeMode": "cover"
-        }
+  "expo": {
+    "name": "Bottleneck",
+    "slug": "bottleneck-native",
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "splash": {
+      "image": "./public/splash.png",
+      "resizeMode": "cover"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      }
+    },
+    "android": {
+      "package": "com.souvik.bottlenecknative"
+    },
+    "ios": {
+      "bundleIdentifier": "com.souvik.bottlenecknative"
     }
+  }
 }
