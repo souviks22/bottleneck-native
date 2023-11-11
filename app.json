@@ -18,7 +18,8 @@
         "origin": false
       },
       "api": "http://10.0.2.2:3000",
-      "tokenKey": "bottleneck-token"
+      "tokenKey": "bottleneck-token",
+      "idKey": "bottleneck-id"
     },
     "android": {
       "package": "com.souvik.bottlenecknative"

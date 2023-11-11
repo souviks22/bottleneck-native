@@ -13,7 +13,7 @@ import Button from "../../components/auth/ui/Button"
 import Poster from "../../components/auth/ui/Poster"
 import Helper from "../../components/auth/ui/Helper"
 
-const { tokenKey } = Constants.expoConfig.extra
+const { tokenKey, idKey } = Constants.expoConfig.extra
 
 const Signup = () => {
     const navigator = useNavigation()
@@ -22,8 +22,9 @@ const Signup = () => {
     const emailChangeHandler = value => setEmail(value.trim())
     const passwordChangeHandler = value => setPassword(value.trim())
     const signupHandler = catchAsync(async () => {
-        const { token } = await httpRequest('/signup', 'post', { email, password })
+        const { token, _id } = await httpRequest('/signup', 'post', { email, password })
         await AsyncStorage.setItem(tokenKey, token)
+        await AsyncStorage.setItem(idKey, _id)
         navigator.reset({ index: 0, routes: [{ name: 'index' }] })
     })
 

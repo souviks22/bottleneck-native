@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { tabActions } from "../../store/tab-slice"
 import { colors } from "../../colors"
 
-const Tab = ({ id, label }) => {
+const Tab = ({ id, label, level }) => {
     const dispatch = useDispatch()
     const isActive = useSelector(state => state.tab.currentTab) === id
 

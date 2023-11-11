@@ -7,12 +7,12 @@ const { api, tokenKey } = Constants.expoConfig.extra
 
 export const useHttp = () => {
     const [isLoading, setIsLoading] = useState()
-    const httpRequest = async (url, method = 'get', body = {}) => {
+    const httpRequest = async (url, method = 'get', body = null) => {
         try {
             setIsLoading(true)
             const token = await AsyncStorage.getItem(tokenKey)
             const res = await fetch(`${api}${url}`, {
-                method, body: JSON.stringify(body),
+                method, body: body ? JSON.stringify(body) : null,
                 headers: {
                     'content-type': 'application/json',
                     'authorization': `Bearer ${token}`

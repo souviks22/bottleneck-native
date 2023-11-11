@@ -4,7 +4,7 @@ import { colors } from "../../colors"
 
 const hours = new Date().getHours()
 
-const Header = ({ name = 'Pal' }) => {
+const Header = ({ name = 'Pal', image }) => {
     return (<View>
         <View style={styles.nav}>
             <Image style={styles.logo} source={require('../../public/splash.png')} />
@@ -13,7 +13,7 @@ const Header = ({ name = 'Pal' }) => {
                     <Feather name="search" size={20} color={colors.primary} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Image style={styles.profile} source={require('../../public/splash.png')} />
+                    <Image style={styles.profile} source={{ uri: image }} />
                 </TouchableOpacity>
             </View>
         </View>
