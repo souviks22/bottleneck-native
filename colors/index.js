@@ -3,5 +3,6 @@ export const colors = {
     dark: '#2f2f2f',
     blue: '#4d74ee',
     grey: '#9897a9',
-    smoke:'#efefef'
+    smoke: '#efefef',
+    navy: '#0b2574'
 }

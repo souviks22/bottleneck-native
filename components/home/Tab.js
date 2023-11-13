@@ -15,16 +15,14 @@ const Tab = ({ id, label, level }) => {
             marginHorizontal: isActive ? 2 : 0
         }}
     >
-        <Text style={{
-            ...styles.label,
-        }}>{label}</Text>
+        <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>)
 }
 
 const styles = StyleSheet.create({
     tab: {
         justifyContent: 'center',
-        width: 90,
+        width: 100,
         padding: 10,
         borderWidth: 1,
         borderLeftWidth: 0.7,

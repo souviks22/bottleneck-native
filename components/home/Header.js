@@ -18,7 +18,7 @@ const Header = ({ name = 'Pal', image }) => {
             </View>
         </View>
         <Text style={styles.greeting}>Good {hours < 12 ? 'Morning' : hours < 18 ? 'Afternoon' : 'Evening'}, {name}</Text>
-        <Text style={styles.tagline}>Everyday is a chance to unravel the mysteries of DSA and grow stronger</Text>
+        <Text style={styles.tagline}>Welcome to the exciting realm of Data Structures and Algorithms! 🌟</Text>
     </View>)
 }
 

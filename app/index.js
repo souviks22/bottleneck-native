@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ScrollView, StyleSheet } from "react-native"
+import { ScrollView, StyleSheet, ActivityIndicator } from "react-native"
 import { useRouter } from "expo-router"
 import { useDispatch, useSelector } from "react-redux"
 import { useHttp } from "../hooks/use-http"
@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import Container from "../components/lib/Container"
 import Header from "../components/home/Header"
 import Tab from "../components/home/Tab"
+import Tile from "../components/home/Tile"
 
 const { tokenKey, idKey } = Constants.expoConfig.extra
 
@@ -20,6 +21,8 @@ const Home = () => {
     const dispatch = useDispatch()
     const { firstname, email, image } = useSelector(state => state.user.user)
     const [fields, setFields] = useState([])
+    const activeTab = useSelector(state => state.tab.currentTab)
+    const [algorithms, setAlgorithms] = useState([])
 
     useEffect(() => {
         catchAsync(async () => {
@@ -30,10 +33,22 @@ const Home = () => {
                 dispatch(userActions.changeUser({ ...user, token }))
                 const { fields } = await httpRequest('/algorithms')
                 setFields(fields)
+                const { algorithms } = await httpRequest(`/algorithms/${activeTab}`)
+                setAlgorithms(algorithms)
             }
             else router.replace('/auth')
         })()
     }, [])
+
+    useEffect(() => {
+        catchAsync(async () => {
+            const token = await AsyncStorage.getItem(tokenKey)
+            if (token) {
+                const { algorithms } = await httpRequest(`/algorithms/${activeTab}`)
+                setAlgorithms(algorithms)
+            }
+        })()
+    }, [activeTab])
 
     return (<Container>
         <Header name={firstname || (email && email.split('@')[0])} image={image} />
@@ -43,13 +58,28 @@ const Home = () => {
                 <Tab key={_id} id={_id} label={name} level={level} />
             )}
         </ScrollView>
+        <ScrollView contentContainerStyle={styles.tiles}>
+            {isLoading ? <ActivityIndicator /> :
+                algorithms.map(({ _id, name, difficulty }) =>
+                    <Tile key={_id} name={name} difficulty={difficulty} />
+                )
+            }
+        </ScrollView>
     </Container>)
 }
 
 const styles = StyleSheet.create({
     tabs: {
-        maxHeight: 40,
-        marginVertical: 30
+        height: 40,
+        marginTop: 30,
+        marginBottom: 40
+    },
+    tiles: {
+        minHeight: 400,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 
