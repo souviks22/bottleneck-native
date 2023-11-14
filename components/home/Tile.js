@@ -1,17 +1,19 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import { useRouter } from "expo-router"
 import { Feather } from "@expo/vector-icons"
 import { colors } from "../../colors"
 
 import Tag from "./Tag"
 
-const Tile = ({ name, difficulty }) => {
+const Tile = ({ id, name, difficulty }) => {
+    const router = useRouter()
     return (<View style={styles.tile}>
         <View style={styles.line}>
             <Tag label={difficulty} />
         </View>
         <Text style={styles.name}>{name}</Text>
         <View style={{ ...styles.line, ...styles.linkBox }}>
-            <TouchableOpacity style={styles.link}>
+            <TouchableOpacity style={styles.link} onPress={() => router.push(`/algorithms/${id}`)}>
                 <Feather name="external-link" size={15} color={colors.primary} />
             </TouchableOpacity>
         </View>

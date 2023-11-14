@@ -19,7 +19,7 @@ const Home = () => {
     const router = useRouter()
     const { httpRequest, isLoading } = useHttp()
     const dispatch = useDispatch()
-    const { firstname, email, image } = useSelector(state => state.user.user)
+    const { user } = useSelector(state => state.user)
     const [fields, setFields] = useState([])
     const activeTab = useSelector(state => state.tab.currentTab)
     const [algorithms, setAlgorithms] = useState([])
@@ -31,10 +31,8 @@ const Home = () => {
             if (token) {
                 const { user } = await httpRequest(`/users/${_id}`)
                 dispatch(userActions.changeUser({ ...user, token }))
-                const { fields } = await httpRequest('/algorithms')
+                const { fields } = await httpRequest('/fields')
                 setFields(fields)
-                const { algorithms } = await httpRequest(`/algorithms/${activeTab}`)
-                setAlgorithms(algorithms)
             }
             else router.replace('/auth')
         })()
@@ -44,27 +42,29 @@ const Home = () => {
         catchAsync(async () => {
             const token = await AsyncStorage.getItem(tokenKey)
             if (token) {
-                const { algorithms } = await httpRequest(`/algorithms/${activeTab}`)
+                const { algorithms } = await httpRequest(activeTab === 'all' ? '/algorithms' : `/fields/${activeTab}`)
                 setAlgorithms(algorithms)
             }
         })()
     }, [activeTab])
 
     return (<Container>
-        <Header name={firstname || (email && email.split('@')[0])} image={image} />
-        <ScrollView contentContainerStyle={styles.tabs} horizontal>
-            <Tab id={'all'} label={'All Topics'} />
-            {fields.map(({ _id, name, level }) =>
-                <Tab key={_id} id={_id} label={name} level={level} />
-            )}
-        </ScrollView>
-        <ScrollView contentContainerStyle={styles.tiles}>
-            {isLoading ? <ActivityIndicator /> :
-                algorithms.map(({ _id, name, difficulty }) =>
-                    <Tile key={_id} name={name} difficulty={difficulty} />
-                )
-            }
-        </ScrollView>
+        {isLoading || !user ? <ActivityIndicator /> :
+            <>
+                <Header name={user.firstname || user.email.split('@')[0]} image={user.image} />
+                <ScrollView contentContainerStyle={styles.tabs} horizontal>
+                    <Tab id={'all'} label={'All Topics'} />
+                    {fields.map(({ _id, name, level }) =>
+                        <Tab key={_id} id={_id} label={name} level={level} />
+                    )}
+                </ScrollView>
+                <ScrollView contentContainerStyle={styles.tiles}>
+                    {algorithms.map(({ _id, name, difficulty }) =>
+                        <Tile key={_id} id={_id} name={name} difficulty={difficulty} />
+                    )}
+                </ScrollView>
+            </>
+        }
     </Container>)
 }
 
@@ -77,9 +77,7 @@ const styles = StyleSheet.create({
     tiles: {
         minHeight: 400,
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flexWrap: 'wrap'
     }
 })
 
