@@ -1,10 +1,12 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native"
+import { useRouter } from "expo-router"
 import { Feather } from '@expo/vector-icons'
 import { colors } from "../../colors"
 
 const hours = new Date().getHours()
 
 const Header = ({ name = 'Pal', image }) => {
+    const router = useRouter()
     return (<View>
         <View style={styles.nav}>
             <Image style={styles.logo} source={require('../../public/splash.png')} />
@@ -12,7 +14,7 @@ const Header = ({ name = 'Pal', image }) => {
                 <TouchableOpacity style={styles.search}>
                     <Feather name="search" size={20} color={colors.primary} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/profile')}>
                     <Image style={styles.profile} source={{ uri: image }} />
                 </TouchableOpacity>
             </View>
