@@ -26,5 +26,5 @@ export const useHttp = () => {
             console.error(error)
         }
     }
-    return { httpRequest, isLoading }
+    return [httpRequest, isLoading]
 }

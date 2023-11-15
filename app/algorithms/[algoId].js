@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native"
 import { useLocalSearchParams } from "expo-router"
 import { useHttp } from "../../hooks/use-http"
 import { catchAsync } from "../../errors/async"
@@ -9,20 +9,23 @@ import Visualiser from "../../components/algorithms/Visualiser"
 
 const Algorithm = () => {
     const { algoId } = useLocalSearchParams()
-    const { httpRequest, isLoading } = useHttp()
+    const [httpRequest, isLoading] = useHttp()
     const [algorithm, setAlgorithm] = useState()
+    const [field, setField] = useState()
 
     useEffect(() => {
         catchAsync(async () => {
-            const { algorithm } = await httpRequest(`/algorithms/${algoId}`)
+            const { algorithm, field } = await httpRequest(`/algorithms/${algoId}`)
             setAlgorithm(algorithm)
+            setField(field)
         })()
     }, [])
 
     return (<Container>
-        {isLoading || !algorithm ? <ActivityIndicator /> :
+        {isLoading || !algorithm || !field ? <ActivityIndicator /> :
             <>
-                <Text>{algoId}</Text>
+                <Text>{algorithm.name}</Text>
+                <Text>{field.name}</Text>
                 <Visualiser id={algorithm.media} />
             </>
         }

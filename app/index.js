@@ -17,7 +17,8 @@ const { tokenKey, idKey } = Constants.expoConfig.extra
 
 const Home = () => {
     const router = useRouter()
-    const { httpRequest, isLoading } = useHttp()
+    const [getRequest, isLoading] = useHttp()
+    const [algorithmsRequest, isAlgorithmsLoading] = useHttp()
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.user)
     const [fields, setFields] = useState([])
@@ -29,9 +30,9 @@ const Home = () => {
             const token = await AsyncStorage.getItem(tokenKey)
             const _id = await AsyncStorage.getItem(idKey)
             if (token) {
-                const { user } = await httpRequest(`/users/${_id}`)
+                const { user } = await getRequest(`/users/${_id}`)
                 dispatch(userActions.changeUser({ ...user, token }))
-                const { fields } = await httpRequest('/fields')
+                const { fields } = await getRequest('/fields')
                 setFields(fields)
             }
             else router.replace('/auth')
@@ -42,7 +43,7 @@ const Home = () => {
         catchAsync(async () => {
             const token = await AsyncStorage.getItem(tokenKey)
             if (token) {
-                const { algorithms } = await httpRequest(activeTab === 'all' ? '/algorithms' : `/fields/${activeTab}`)
+                const { algorithms } = await algorithmsRequest(activeTab === 'all' ? '/algorithms' : `/fields/${activeTab}`)
                 setAlgorithms(algorithms)
             }
         })()
@@ -58,10 +59,15 @@ const Home = () => {
                         <Tab key={_id} id={_id} label={name} level={level} />
                     )}
                 </ScrollView>
-                <ScrollView contentContainerStyle={styles.tiles}>
-                    {algorithms.map(({ _id, name, difficulty }) =>
-                        <Tile key={_id} id={_id} name={name} difficulty={difficulty} />
-                    )}
+                <ScrollView contentContainerStyle={{
+                    ...styles.tiles,
+                    justifyContent: isAlgorithmsLoading ? 'center' : 'flex-start'
+                }}>
+                    {isAlgorithmsLoading || !user ? <ActivityIndicator /> :
+                        algorithms.map(({ _id, name, difficulty }) =>
+                            <Tile key={_id} id={_id} name={name} difficulty={difficulty} />
+                        )
+                    }
                 </ScrollView>
             </>
         }
