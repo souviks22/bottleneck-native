@@ -24,9 +24,9 @@ const Algorithm = () => {
     return (<Container>
         {isLoading || !algorithm || !field ? <ActivityIndicator /> :
             <>
+                <Visualiser id={algorithm.media} />
                 <Text>{algorithm.name}</Text>
                 <Text>{field.name}</Text>
-                <Visualiser id={algorithm.media} />
             </>
         }
     </Container>)

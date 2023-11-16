@@ -49,7 +49,7 @@ const Home = () => {
         })()
     }, [activeTab])
 
-    return (<Container>
+    return (<Container style={styles.container}>
         {isLoading || !user ? <ActivityIndicator /> :
             <>
                 <Header name={user.firstname || user.email.split('@')[0]} image={user.image} />
@@ -75,6 +75,9 @@ const Home = () => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 5
+    },
     tabs: {
         height: 40,
         marginTop: 30,

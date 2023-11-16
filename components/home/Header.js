@@ -29,16 +29,17 @@ const styles = StyleSheet.create({
         color: colors.dark,
         fontSize: 25,
         fontWeight: 'bold',
-        paddingVertical: 10
+        padding: 10
     },
     tagline: {
-        color: colors.dark
+        color: colors.dark,
+        paddingHorizontal: 15
     },
     nav: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 10
+        padding: 10
     },
     logo: {
         height: 42,
