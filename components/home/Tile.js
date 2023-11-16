@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
         width: '50%',
         height: 200,
         backgroundColor: colors.blue,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        padding: 10,
         borderWidth: 1,
         borderLeftWidth: 0.7,
         borderRightWidth: 0.7,
         borderColor: colors.navy,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     name: {
         fontSize: 20,

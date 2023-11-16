@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { View, StyleSheet, ActivityIndicator } from "react-native"
+import { useState, useEffect } from "react"
+import { View, ActivityIndicator, BackHandler } from "react-native"
 import { catchAsync } from "../../errors/async"
 
 import YoutubeIframe from "react-native-youtube-iframe"
@@ -16,20 +16,27 @@ const Visualiser = ({ id }) => {
         setOrientation(current)
     })
 
+    useEffect(() => {
+        const portraitHandler = catchAsync(async () => {
+            if (orientation === PORTRAIT) return false
+            await ScreenOrientation.lockAsync(PORTRAIT)
+            setOrientation(PORTRAIT)
+            return true
+        })
+        BackHandler.addEventListener('hardwareBackPress', portraitHandler)
+        return () => BackHandler.removeEventListener('hardwareBackPress', portraitHandler)
+    }, [])
+
     return (<View>
         {!state && <ActivityIndicator />}
         <YoutubeIframe
-            height={300}
-            play={true}
+            play
+            height={220}
             videoId={id}
             onChangeState={state => setState(state)}
             onFullScreenChange={orientationChangeHandler}
         />
     </View>)
 }
-
-const styles = StyleSheet.create({
-
-})
 
 export default Visualiser
