@@ -17,7 +17,7 @@ const { tokenKey, idKey } = Constants.expoConfig.extra
 
 const Signin = () => {
     const navigator = useNavigation()
-    const { httpRequest, isLoading } = useHttp()
+    const [httpRequest, isLoading] = useHttp()
     const [email, setEmail] = useState(), [password, setPassword] = useState()
     const emailChangeHandler = value => setEmail(value.trim())
     const passwordChangeHandler = value => setPassword(value.trim())
