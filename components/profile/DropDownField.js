@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
     fields: {
         flexDirection: 'row',
-        height: 60,
+        height: 50,
         borderColor: colors.grey,
         borderWidth: 2,
         marginBottom: 10,
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
         height: 60,
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
-        paddingRight: 10
+        paddingRight: 10,
+        paddingBottom:5
     },
     placeholderStyle: {
         fontSize: 20,

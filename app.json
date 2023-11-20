@@ -8,7 +8,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-screen-orientation"
+      "expo-screen-orientation",
+      "expo-image-picker"
     ],
     "splash": {
       "image": "./public/splash.png",

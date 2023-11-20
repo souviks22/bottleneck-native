@@ -8,13 +8,13 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
     const [editMode, seteditMode] = useState(false);
     const [fieldvalue, setfieldValue] = useState(value);
     const [selectedDate, setSelectedDate] = useState(new Date(value));
-  
+
     const inputref = useRef();
-    
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
     }
-    
+
     const handlefocus = () => {
         seteditMode(true)
     }
@@ -41,7 +41,7 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
                     onFocus={handlefocus}
                     keyboardType={DataType === 'number' ? 'number-pad' : 'default'}
                     onBlur={handleBlur}
-                    cursorColor={DataType === "date" ? 'white' : 'default'}
+                    selectionColor={DataType === "date" ? colors.primary : '#ff00ff'}
                     editable={iseditAble}>
                 </TextInput>
                 {DataType === 'date' && editMode && (
@@ -70,6 +70,9 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
                 )
                 }
             </View>
+            {!iseditAble && (
+                <Text style={styles.warning}>*This field can't be edited.</Text>
+            )}
         </View>
     )
 
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     },
     fields: {
         flexDirection: 'row',
-        height: 60,
+        height: 50,
         borderColor: colors.grey,
         borderWidth: 2,
         marginBottom: 10,
@@ -124,6 +127,10 @@ const styles = StyleSheet.create({
     noneditAble: {
         color: colors.grey
     },
+    warning: {
+        color: colors.yellow,
+        paddingLeft:10
+    }
 
 
 });

@@ -3,6 +3,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from '../../colors';
 
+
 const Header = () => {
     return (
         <View style={Styles.header}>
@@ -19,7 +20,7 @@ const Styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '40%',
-        marginTop: 20,
+        marginTop: 15,
         marginLeft: 20,
         color: colors.dark
     },
@@ -29,7 +30,8 @@ const Styles = StyleSheet.create({
         backgroundColor: colors.primary
     },
     intro: {
-        fontSize: 20,
+        fontSize: 25,
+        fontWeight:'bold'
     }
 })
 
