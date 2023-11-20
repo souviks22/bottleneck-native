@@ -1,11 +1,20 @@
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../colors';
 const Fields = ({ label, DataType, iseditAble, value }) => {
-    const [editMode, seteditMode] = useState();
+
+    const [editMode, seteditMode] = useState(false);
     const [fieldvalue, setfieldValue] = useState(value);
+    const [selectedDate, setSelectedDate] = useState(new Date(value));
+  
     const inputref = useRef();
+    
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    }
+    
     const handlefocus = () => {
         seteditMode(true)
     }
@@ -25,17 +34,31 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
             <View style={[styles.fields, editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}>
 
                 <TextInput style={styles.inputField}
-                    mode="outlined"
                     ref={inputref}
                     placeholder={label}
-                    value={fieldvalue}
+                    value={DataType === "date" ? selectedDate.toLocaleDateString() : fieldvalue}
                     onChangeText={(text) => setfieldValue(text)}
                     onFocus={handlefocus}
+                    keyboardType={DataType === 'number' ? 'number-pad' : 'default'}
                     onBlur={handleBlur}
+                    cursorColor={DataType === "date" ? 'white' : 'default'}
                     editable={iseditAble}>
                 </TextInput>
+                {DataType === 'date' && editMode && (
+                    <RNDateTimePicker
+                        style={styles.inputField}
+                        value={selectedDate}
+                        onChange={(event, date) => {
+                            seteditMode(false);
+                            handleDateChange(date);
+                            inputref.current.blur();
+                        }}
+                        editable={iseditAble}
+                    />
+                )}
 
-                {editMode && (
+
+                {editMode && DataType != 'date' && (
                     <View style={styles.action}>
                         <Text style={styles.save} onPress={handleSave}>
                             <Feather name="save" size={24} color="black" />
@@ -54,7 +77,7 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
-        paddingVertical:10,
+        paddingVertical: 10,
         position: 'relative'
     },
     labelOnTop: {
@@ -76,7 +99,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         zIndex: 0
-
     },
     inputField: {
         height: 60,
@@ -101,8 +123,9 @@ const styles = StyleSheet.create({
     },
     noneditAble: {
         color: colors.grey
-    }
+    },
 
 
-})
+});
+
 export default Fields;
