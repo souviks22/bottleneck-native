@@ -28,7 +28,7 @@ const Signin = () => {
         navigator.reset({ index: 0, routes: [{ name: 'index' }] })
     })
 
-    return (<Container style={styles.container}>
+    return (<Container auth>
         <Header />
         <Input label={'Email Address'} onChange={emailChangeHandler} />
         <Input label={'Password'} onChange={passwordChangeHandler} secure />
@@ -42,9 +42,6 @@ const Signin = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 20
-    },
     actions: {
         marginTop: '5%'
     }

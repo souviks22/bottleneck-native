@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
         height: 200,
         backgroundColor: colors.blue,
         padding: 10,
-        borderWidth: 1,
-        borderLeftWidth: 0.7,
-        borderRightWidth: 0.7,
+        borderBottomWidth: 0.7,
+        borderLeftWidth: 0.5,
+        borderRightWidth: 0.5,
         borderColor: colors.navy,
         justifyContent: 'space-between',
         alignItems: 'center'

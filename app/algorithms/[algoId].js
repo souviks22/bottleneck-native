@@ -12,8 +12,8 @@ import Tag from "../../components/algorithms/Tag"
 const Algorithm = () => {
     const { algoId } = useLocalSearchParams()
     const [httpRequest, isLoading] = useHttp()
-    const [algorithm, setAlgorithm] = useState()
-    const [field, setField] = useState()
+    const [algorithm, setAlgorithm] = useState({})
+    const [field, setField] = useState({})
 
     useEffect(() => {
         catchAsync(async () => {
@@ -23,23 +23,19 @@ const Algorithm = () => {
         })()
     }, [])
 
-    return (<Container>
-        {isLoading || !algorithm || !field ? <ActivityIndicator /> :
-            <>
-                <Visualiser id={algorithm.media} />
-                <View style={styles.container}>
-                    <Text style={styles.title}>{algorithm.name}</Text>
-                    <View style={styles.tags}>
-                        <Tag label={field.name} />
-                        <Tag label={field.level} />
-                        <Tag label={algorithm.difficulty} />
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={styles.descText}>{algorithm.description}</Text>
-                    </View>
-                </View>
-            </>
-        }
+    return (<Container isLoading={isLoading || !algorithm || !field}>
+        <Visualiser id={algorithm.media} />
+        <View style={styles.container}>
+            <Text style={styles.title}>{algorithm.name}</Text>
+            <View style={styles.tags}>
+                <Tag label={field.name} />
+                <Tag label={field.level} />
+                <Tag label={algorithm.difficulty} />
+            </View>
+            <View style={styles.description}>
+                <Text style={styles.descText}>{algorithm.description}</Text>
+            </View>
+        </View>
     </Container>)
 }
 

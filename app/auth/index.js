@@ -8,7 +8,7 @@ import Helper from "../../components/auth/ui/Helper"
 import Footer from "../../components/auth/basic/Footer"
 
 const Auth = () => {
-    return (<Container style={styles.container}>
+    return (<Container auth>
         <Header />
         <Button
             label={'Sign Up with Google'}
@@ -39,9 +39,6 @@ const Auth = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 20
-    },
     alter: {
         marginTop: 30
     }
