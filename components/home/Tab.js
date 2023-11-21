@@ -12,7 +12,7 @@ const Tab = ({ id, label, level }) => {
         style={{
             ...styles.tab,
             backgroundColor: isActive ? colors.blue : colors.dark,
-            marginHorizontal: isActive ? 5 : 0
+            marginHorizontal: isActive ? 4 : 0
         }}
     >
         <Text style={styles.label}>{label}</Text>

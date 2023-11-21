@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { useLocalSearchParams } from "expo-router"
+import { Entypo } from "@expo/vector-icons"
 import { useHttp } from "../../hooks/use-http"
 import { catchAsync } from "../../errors/async"
 import { colors } from "../../colors"
@@ -8,6 +9,8 @@ import { colors } from "../../colors"
 import Container from "../../components/lib/Container"
 import Visualiser from "../../components/algorithms/Visualiser"
 import Tag from "../../components/algorithms/Tag"
+import Section from "../../components/algorithms/Section"
+import Recommendation from "../../components/algorithms/Recommendation"
 
 const Algorithm = () => {
     const { algoId } = useLocalSearchParams()
@@ -32,9 +35,18 @@ const Algorithm = () => {
                 <Tag label={field.level} />
                 <Tag label={algorithm.difficulty} />
             </View>
-            <View style={styles.description}>
-                <Text style={styles.descText}>{algorithm.description}</Text>
-            </View>
+            <Section title={'Brief'} icon={<Entypo name="text" size={20} color={colors.dark} />}>
+                <View style={styles.description}>
+                    <Text style={styles.descText}>{algorithm.description}</Text>
+                </View>
+            </Section>
+            <Section title={'Recommended'} icon={<Entypo name="colours" size={20} color={colors.dark} />}>
+                <View style={styles.recommended}>
+                    {field.algorithms && field.algorithms.map(algo =>
+                        (algo != algoId) ? < Recommendation key={algo} algoId={algo} /> : null
+                    )}
+                </View>
+            </Section>
         </View>
     </Container>)
 }
@@ -52,13 +64,19 @@ const styles = StyleSheet.create({
         paddingBottom: 10
     },
     description: {
-        backgroundColor: colors.smoke,
+        backgroundColor: colors.primary,
         padding: 10,
-        borderRadius: 10
+        borderRadius: 5,
+        marginVertical: 5
     },
     descText: {
         color: colors.dark,
         lineHeight: 20
+    },
+    recommended: {
+        marginVertical: 5,
+        borderRadius: 5,
+        overflow: 'hidden'
     }
 })
 
