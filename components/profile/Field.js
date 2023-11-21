@@ -2,6 +2,7 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors } from '../../colors';
 const Fields = ({ label, DataType, iseditAble, value }) => {
 
@@ -31,7 +32,8 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
     return (
         <View style={styles.container}>
             {fieldvalue && <Text style={[styles.labelOnTop, editMode && styles.editModeinput]}>{label}</Text>}
-            <View style={[styles.fields, editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}>
+            <TouchableOpacity style={[styles.fields, editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}
+                onPress={!editMode ? handlefocus:handleBlur}>
 
                 <TextInput style={styles.inputField}
                     ref={inputref}
@@ -69,7 +71,7 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
                     </View>
                 )
                 }
-            </View>
+            </TouchableOpacity>
             {!iseditAble && (
                 <Text style={styles.warning}>*This field can't be edited.</Text>
             )}
@@ -92,20 +94,21 @@ const styles = StyleSheet.create({
     },
     fields: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         height: 50,
         borderColor: colors.grey,
         borderWidth: 2,
         marginBottom: 10,
         paddingLeft: 8,
         fontSize: 20,
-        width: '100%',
+        width: 'auto',
         alignItems: 'center',
         borderRadius: 10,
         zIndex: 0
     },
     inputField: {
         height: 60,
-        width: '78%',
+        width: 'auto',
         fontSize: 20,
         paddingLeft: 10
     },
@@ -114,7 +117,8 @@ const styles = StyleSheet.create({
         color: colors.black
     },
     action: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
     },
     save: {
         padding: 5,
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
     },
     warning: {
         color: colors.yellow,
-        paddingLeft:10
+        paddingLeft: 10
     }
 
 

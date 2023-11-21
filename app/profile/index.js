@@ -1,45 +1,54 @@
 
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from "react-native"
-import Container from "../../components/lib/Container"
-import DropDown from "../../components/profile/DropDownField"
-import Fields from "../../components/profile/Field"
-import Header from "../../components/profile/Header"
-import Imagefield from "../../components/profile/Imagefield"
+import { router } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { colors } from "../../colors";
+import Container from "../../components/lib/Container";
+import Header from "../../components/profile/Header";
+import ProfileView from "../../components/profile/ProfileView";
+const ProfilePage = () => {
 
-const Profile = () => {
     return (
-
         <Container>
             <Header />
-            <KeyboardAvoidingView keyboardVerticalOffset={0}>
-                <ScrollView>
-                    <View style={Styles.imagesection}>
-                        <Imagefield initialImage={require("../../public/dummy.jpeg")} />
-                    </View>
-                    <View>
-                        <Fields label='Name' iseditAble={true} value='Sourik Bhuiya' DataType='text' />
-                        <Fields label='Email' iseditAble={false} value='sourikbhuiya@gmail.com' DataType='text' />
-                        <Fields label='Phone Number' iseditAble={true} value='8617790162' DataType='number' />
-                        <Fields label='D.O.B' iseditAble={true} value='2003-08-20' DataType='date' />
-                        <DropDown label='Level' iseditAble={true} value='Beginner' />
-                    </View>
-                </ScrollView>
-            </KeyboardAvoidingView>
+            <View style={Styles.container}>
 
+                <View style={Styles.ProfileView}><ProfileView name='Sourik Bhuiya' email="sourikbhuiya@gmail.com" picture={require("../../public/dummy.jpeg")} /></View>
 
+                <TouchableOpacity label={'Your Profile'} onPress={() => router.push('/profile/profile')} style={Styles.ProfileButton}><Text style={Styles.buttonText}>Your Profile</Text></TouchableOpacity>
+                <TouchableOpacity label={'Your Profile'} onPress={() => router.push('/auth')} style={Styles.SignOutButton}><Text style={Styles.buttonText}>Sign Out</Text></TouchableOpacity>
+            </View>
         </Container>
-
-
     )
+
 }
 const Styles = StyleSheet.create({
-    linearGradient: {
-        flex: 1
+    container: {
+        paddingVertical: 10,
+        paddingHorizontal: 20
     },
-    imagesection: {
-        position: 'relative',
-        marginBottom: 20,
-        marginTop: 20
+    ProfileView: {
+        marginVertical: 30
+    },
+    ProfileButton: {
+        backgroundColor: colors.green,
+        padding: 10,
+        borderRadius: 10,
+        marginVertical: 5,
+        width: "100%",
+        alignItems: "center"
+    },
+    SignOutButton: {
+        backgroundColor: colors.red,
+        padding: 10,
+        borderRadius: 10,
+        marginVertical: 5,
+        width: "100%",
+        alignItems: "center"
+    },
+    buttonText: {
+        fontSize: 20
     }
+
+
 })
-export default Profile
+export default ProfilePage

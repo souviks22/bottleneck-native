@@ -8,7 +8,7 @@ import Helper from "../../components/auth/ui/Helper"
 import Footer from "../../components/auth/basic/Footer"
 
 const Auth = () => {
-    return (<Container>
+    return (<Container auth>
         <Header />
         <Button
             label={'Sign Up with Google'}

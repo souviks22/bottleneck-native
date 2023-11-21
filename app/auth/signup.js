@@ -28,7 +28,7 @@ const Signup = () => {
         navigator.reset({ index: 0, routes: [{ name: 'index' }] })
     })
 
-    return (<Container>
+    return (<Container auth>
         <Poster uri={require('../../public/signin.png')} />
         <Header />
         <Input label={'Email Address'} onChange={emailChangeHandler} />

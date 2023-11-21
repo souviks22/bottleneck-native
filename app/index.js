@@ -49,28 +49,24 @@ const Home = () => {
         })()
     }, [activeTab])
 
-    return (<Container style={styles.container}>
-        {isLoading || !user ? <ActivityIndicator /> :
-            <>
-                <Header name={user.firstname || user.email.split('@')[0]} image={user.image} />
-                <ScrollView contentContainerStyle={styles.tabs} horizontal>
-                    <Tab id={'all'} label={'All Topics'} />
-                    {fields.map(({ _id, name, level }) =>
-                        <Tab key={_id} id={_id} label={name} level={level} />
-                    )}
-                </ScrollView>
-                <ScrollView contentContainerStyle={{
-                    ...styles.tiles,
-                    justifyContent: isAlgorithmsLoading ? 'center' : 'flex-start'
-                }}>
-                    {isAlgorithmsLoading || !user ? <ActivityIndicator /> :
-                        algorithms.map(({ _id, name, difficulty }) =>
-                            <Tile key={_id} id={_id} name={name} difficulty={difficulty} />
-                        )
-                    }
-                </ScrollView>
-            </>
-        }
+    return (<Container style={styles.container} isLoading={isLoading || !user}>
+        <Header name={user.firstname || user.email} image={user.image} />
+        <ScrollView contentContainerStyle={styles.tabs} horizontal>
+            <Tab id={'all'} label={'All Topics'} />
+            {fields.map(({ _id, name, level }) =>
+                <Tab key={_id} id={_id} label={name} level={level} />
+            )}
+        </ScrollView>
+        <ScrollView contentContainerStyle={{
+            ...styles.tiles,
+            justifyContent: isAlgorithmsLoading ? 'center' : 'flex-start'
+        }}>
+            {isAlgorithmsLoading || !user ? <ActivityIndicator /> :
+                algorithms.map(({ _id, name, difficulty }) =>
+                    <Tile key={_id} id={_id} name={name} difficulty={difficulty} />
+                )
+            }
+        </ScrollView>
     </Container>)
 }
 
@@ -86,7 +82,9 @@ const styles = StyleSheet.create({
     tiles: {
         minHeight: 400,
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        borderRadius: 15,
+        overflow: 'hidden'
     }
 })
 

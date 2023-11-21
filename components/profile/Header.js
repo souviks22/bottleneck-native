@@ -1,13 +1,14 @@
 
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from '../../colors';
 
-
 const Header = () => {
+    const navigation = useNavigation();
     return (
         <View style={Styles.header}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
                 <AntDesign name="arrowleft" style={Styles.backbutton} />
             </TouchableOpacity>
             <Text style={Styles.intro}> Your Profile </Text>
@@ -31,7 +32,7 @@ const Styles = StyleSheet.create({
     },
     intro: {
         fontSize: 25,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     }
 })
 

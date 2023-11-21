@@ -28,7 +28,7 @@ const Signin = () => {
         navigator.reset({ index: 0, routes: [{ name: 'index' }] })
     })
 
-    return (<Container>
+    return (<Container auth>
         <Header />
         <Input label={'Email Address'} onChange={emailChangeHandler} />
         <Input label={'Password'} onChange={passwordChangeHandler} secure />
