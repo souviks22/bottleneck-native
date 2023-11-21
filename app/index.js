@@ -3,8 +3,8 @@ import { ScrollView, StyleSheet, ActivityIndicator } from "react-native"
 import { useRouter } from "expo-router"
 import { useDispatch, useSelector } from "react-redux"
 import { useHttp } from "../hooks/use-http"
+import { useAsync } from "../hooks/use-async"
 import { userActions } from "../store/user-slice"
-import { catchAsync } from "../errors/async"
 
 import Constants from "expo-constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -20,6 +20,7 @@ const Home = () => {
     const [getRequest, isLoading] = useHttp()
     const [algorithmsRequest, isAlgorithmsLoading] = useHttp()
     const dispatch = useDispatch()
+    const catchAsync = useAsync()
     const { user } = useSelector(state => state.user)
     const [fields, setFields] = useState([])
     const activeTab = useSelector(state => state.tab.currentTab)

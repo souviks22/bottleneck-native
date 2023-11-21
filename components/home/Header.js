@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native"
 import { useRouter, useNavigation } from "expo-router"
 import { Feather } from '@expo/vector-icons'
 import { colors } from "../../colors"
-import { catchAsync } from "../../errors/async"
+import { useAsync } from "../../hooks/use-async"
 
 import Constants from "expo-constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -13,6 +13,7 @@ const { tokenKey, idKey } = Constants.expoConfig.extra
 const Header = ({ name = 'Pal', image }) => {
     const router = useRouter()
     const navigator = useNavigation()
+    const catchAsync = useAsync()
 
     const signoutHandler = catchAsync(async () => {
         await AsyncStorage.removeItem(tokenKey)
