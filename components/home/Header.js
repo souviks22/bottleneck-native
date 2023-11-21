@@ -1,12 +1,25 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native"
-import { useRouter } from "expo-router"
+import { useRouter, useNavigation } from "expo-router"
 import { Feather } from '@expo/vector-icons'
 import { colors } from "../../colors"
+import { catchAsync } from "../../errors/async"
+
+import Constants from "expo-constants"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const hours = new Date().getHours()
+const { tokenKey, idKey } = Constants.expoConfig.extra
 
 const Header = ({ name = 'Pal', image }) => {
     const router = useRouter()
+    const navigator = useNavigation()
+
+    const signoutHandler = catchAsync(async () => {
+        await AsyncStorage.removeItem(tokenKey)
+        await AsyncStorage.removeItem(idKey)
+        navigator.reset({ index: 0, routes: [{ name: 'index' }] })
+    })
+
     return (<View>
         <View style={styles.nav}>
             <Image style={styles.logo} source={require('../../public/splash.png')} />
@@ -14,7 +27,7 @@ const Header = ({ name = 'Pal', image }) => {
                 <TouchableOpacity style={styles.search}>
                     <Feather name="search" size={20} color={colors.primary} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/profile')}>
+                <TouchableOpacity onPress={signoutHandler}>
                     <Image style={styles.profile} source={{ uri: image }} />
                 </TouchableOpacity>
             </View>

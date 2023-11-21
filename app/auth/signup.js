@@ -28,7 +28,7 @@ const Signup = () => {
         navigator.reset({ index: 0, routes: [{ name: 'index' }] })
     })
 
-    return (<Container>
+    return (<Container style={styles.container}>
         <Poster uri={require('../../public/signin.png')} />
         <Header />
         <Input label={'Email Address'} onChange={emailChangeHandler} />
@@ -41,6 +41,9 @@ const Signup = () => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 20
+    },
     actions: {
         marginTop: '15%'
     }

@@ -20,12 +20,14 @@ const Footer = () => {
 
 const styles = StyleSheet.create({
     footer: {
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         flexWrap: 'wrap',
         position: 'absolute',
-        bottom: 10
+        bottom: 10,
+        marginHorizontal: 20
     },
     plain: {
         color: colors.dark
