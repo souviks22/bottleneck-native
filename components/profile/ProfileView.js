@@ -1,72 +1,55 @@
+import { Image, ImageBackground, StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { router } from "expo-router";
-import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../colors";
+
 const ProfileView = ({ name, email, picture }) => {
-    return (
-        
-            <ImageBackground source={require("../../public/profile_background.jpg")} style={Styles.container}>
-
-
-                <View style={Styles.imagesection}>
-                    <Image source={picture} style={Styles.image} />
-                </View>
-                <View style={Styles.textsection}>
-                    <Text style={Styles.text}>{name}</Text>
-                    <Text style={Styles.email}>{email}</Text>
-                    <TouchableOpacity onPress={() => router.push('/profile/details')}>
-                    <Text style={Styles.view}>View more </Text>
-                    </TouchableOpacity>
-                </View>
-            
-            </ImageBackground>
-    )
+    return (<ImageBackground
+        source={require("../../public/profile_background.jpg")}
+        style={styles.profileView}
+    >
+        <View style={styles.top}>
+            <Image source={{ uri: picture }} style={styles.image} />
+            <View>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.email}>{email}</Text>
+            </View>
+        </View>
+        <TouchableOpacity onPress={() => router.push('/profile/details')}>
+            <Text style={styles.view}>View more</Text>
+        </TouchableOpacity>
+    </ImageBackground>)
 }
 
-const Styles = StyleSheet.create({
-    container: {
-        paddingVertical: 20,
-        flexDirection: 'row',
-        paddingHorizontal: 10,
-        borderWidt: 2,
+const styles = StyleSheet.create({
+    profileView: {
+        borderRadius: 20,
         overflow: 'hidden',
-        marginBottom: 10,
-        borderRadius: 11,
-        width: 'auto',
-        elevation: 50
+        marginBottom: 40
     },
-    imagesection: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        overflow: "hidden",
-        borderWidth: 1,
-        alignItems: "center",
-        marginVertical: 20,
-        marginHorizontal: 10
+    top: {
+        flexDirection: 'row',
+        paddingVertical: 30,
+        paddingHorizontal: 15
     },
     image: {
-        width: "100%",
-        height: "100%",
-        borderRadius: 40
+        width: 80,
+        height: 80,
+        marginRight: 15
     },
-    textsection: {
-        paddingVertical: 25,
-        paddingHorizontal: 10
-    },
-    text: {
+    name: {
+        color: colors.primary,
         fontSize: 30,
-        color: colors.yellow
+        fontWeight: 'bold',
+        paddingVertical: 5
     },
     email: {
-        color: colors.blue
+        color: colors.grey
     },
-    view :{
+    view: {
         color: colors.smoke,
-        paddingVertical:10
+        textAlign: 'center',
+        padding: 20
     }
-}
-)
+})
 
 export default ProfileView

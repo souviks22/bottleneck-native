@@ -1,37 +1,22 @@
-
+import { TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { router } from 'expo-router';
 import { colors } from '../../colors';
 
 const Header = () => {
-    const navigation = useNavigation();
-    return (
-        <View style={Styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" style={Styles.backbutton} />
-            </TouchableOpacity>
-            <Text style={Styles.intro}> Your Profile </Text>
-        </View>)
+    return (<TouchableOpacity
+        style={styles.header}
+        onPress={() => router.back()}
+    >
+        <AntDesign name="arrowleft" size={25} />
+    </TouchableOpacity>)
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
     header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '40%',
-        marginTop: 15,
-        marginLeft: 20,
-        color: colors.dark
-    },
-    backbutton: {
-        fontSize: 20,
-        padding: 2
-    },
-    intro: {
-        fontSize: 25,
-        fontWeight: 'bold'
+        color: colors.dark,
+        paddingTop: 20,
+        paddingBottom: 10
     }
 })
 

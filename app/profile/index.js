@@ -16,56 +16,42 @@ const Profile = () => {
     const modalVisibilityHandler = () => setIsOpen(isOpen => !isOpen);
     const name = user.firstname ? user.firstname : 'Complete Profile'
 
-    return (<Container>
+    return (<Container style={styles.container}>
         <Header />
-        <View style={Styles.container}>
-            <View style={Styles.profileView}>
-                <ProfileView name={name} email={user.email} picture={user.image} />
+        <ProfileView name={name} email={user.email} picture={user.image} />
+        <TouchableOpacity
+            label={'Your Profile'}
+            onPress={() => router.push('/profile/details')}
+            style={styles.actionButton}>
+            <View style={styles.left}>
+                <AntDesign name="profile" size={15} color="black" style={styles.icon} />
+                <Text style={styles.buttonText}>Your Profile</Text>
             </View>
-            <TouchableOpacity
-                label={'Your Profile'}
-                onPress={() => router.push('/profile/details')}
-                style={Styles.actionButton}>
-                <View style={Styles.leftpart}>
-                    <AntDesign name="profile" size={15} color="black" style={Styles.icon} />
-                    <Text style={Styles.buttonText}>Your Profile</Text>
-                </View>
-                <View style={Styles.rightpart}>
-                    <AntDesign name="right" size={20} color="grey" style={Styles.right} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity label={'Your Profile'} onPress={modalVisibilityHandler} style={Styles.actionButton}>
-                <View style={Styles.leftpart}>
-                    <AntDesign name="poweroff" size={15} color="black" style={Styles.icon} />
-                    <Text style={Styles.buttonText}>Sign Out</Text>
-                </View>
-                <View>
-                    <AntDesign name="right" size={20} color="grey" style={Styles.right} />
-                </View>
-            </TouchableOpacity>
-        </View>
+            <AntDesign name="right" size={20} color="grey" style={styles.right} />
+        </TouchableOpacity>
+        <TouchableOpacity label={'Your Profile'} onPress={modalVisibilityHandler} style={styles.actionButton}>
+            <View style={styles.left}>
+                <AntDesign name="poweroff" size={15} color="black" style={styles.icon} />
+                <Text style={styles.buttonText}>Sign Out</Text>
+            </View>
+            <AntDesign name="right" size={20} color="grey" style={styles.right} />
+        </TouchableOpacity>
         <SignoutHandler isOpen={isOpen} closeModalHandler={modalVisibilityHandler} />
     </Container>)
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        paddingVertical: 10,
-        paddingHorizontal: 20
+        paddingHorizontal: 10
     },
-    leftpart: {
-        flexDirection: 'row'
-    },
-    profileView: {
-        marginVertical: 30
+    left: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     icon: {
         padding: 7,
         backgroundColor: colors.smoke,
-        borderRadius: 15,
-        height: 30,
-        width: 30,
-        overflow: "hidden"
+        borderRadius: 15
     },
     actionButton: {
         backgroundColor: colors.primary,
@@ -74,11 +60,10 @@ const Styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         marginVertical: 5,
-        width: "100%",
-        alignItems: "center"
+        alignItems: 'center'
     },
     buttonText: {
-        fontSize: 17,
+        fontSize: 15,
         textAlign: 'center',
         paddingHorizontal: 10
     }
