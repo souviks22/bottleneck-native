@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors } from '../../colors';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 const Fields = ({ label, DataType, iseditAble, value }) => {
 
     const [editMode, seteditMode] = useState(false);
@@ -90,7 +91,9 @@ const styles = StyleSheet.create({
         left: 40,
         zIndex: 1,
         color: colors.grey,
-        backgroundColor: 'white'
+        backgroundColor: colors.smoke,
+        padding: -5,
+        borderRadius:20
     },
     fields: {
         flexDirection: 'row',
@@ -105,10 +108,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         zIndex: 0,
-        backgroundColor:colors.primary
+        backgroundColor: colors.primary
     },
     inputField: {
-        height: 60,
+        height: 40,
         width: 'auto',
         fontSize: 20,
         paddingLeft: 10
