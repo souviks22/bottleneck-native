@@ -33,7 +33,7 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
         <View style={styles.container}>
             {fieldvalue && <Text style={[styles.labelOnTop, editMode && styles.editModeinput]}>{label}</Text>}
             <TouchableOpacity style={[styles.fields, editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}
-                onPress={!editMode ? handlefocus:handleBlur}>
+                onPress={!editMode ? handlefocus : handleBlur}>
 
                 <TextInput style={styles.inputField}
                     ref={inputref}
@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 40,
         zIndex: 1,
-        backgroundColor: "white",
-        color: colors.grey
+        color: colors.grey,
+        backgroundColor: 'white'
     },
     fields: {
         flexDirection: 'row',

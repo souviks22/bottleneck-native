@@ -27,8 +27,7 @@ const Styles = StyleSheet.create({
     },
     backbutton: {
         fontSize: 20,
-        padding: 2,
-        backgroundColor: colors.primary
+        padding: 2
     },
     intro: {
         fontSize: 25,
