@@ -7,15 +7,14 @@ import Container from "../../components/lib/Container";
 import Header from "../../components/profile/Header";
 import ProfileView from "../../components/profile/ProfileView";
 import SignoutHandler from "../../components/profile/SignoutHandler";
+
 const ProfilePage = () => {
     const [isOpen, setisOpen] = useState(false);
     function handleModal() {
         setisOpen(isOpen => !isOpen);
-        console.log(isOpen);
     }
     return (
         <Container>
-            <SignoutHandler />
             <Header />
             <View style={Styles.container}>
 
@@ -43,6 +42,7 @@ const ProfilePage = () => {
                     </View>
                 </TouchableOpacity>
             </View>
+            <SignoutHandler isOpen={isOpen} closeModalHandler={handleModal} />
         </Container>
     )
 
