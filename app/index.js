@@ -2,7 +2,6 @@ import { useRouter } from "expo-router"
 import { useEffect, useState } from "react"
 import { ActivityIndicator, ScrollView, StyleSheet } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
-import { catchAsync } from "../errors/async"
 import { useHttp } from "../hooks/use-http"
 import { useAsync } from "../hooks/use-async"
 import { userActions } from "../store/user-slice"
@@ -37,7 +36,7 @@ const Home = () => {
                 const { fields } = await getRequest('/fields')
                 setFields(fields)
             }
-            else router.replace('/profile')
+            else router.replace('/auth')
         })()
     }, [])
 
