@@ -20,6 +20,7 @@ const SignoutHandler = ({ isOpen, closeModalHandler = () => { } }) => {
 
     return (<Modal
         visible={isOpen}
+        animationType={'slide'}
         onRequestClose={closeModalHandler}
         transparent
     >

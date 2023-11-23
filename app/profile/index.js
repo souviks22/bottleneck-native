@@ -1,52 +1,53 @@
-import { AntDesign } from '@expo/vector-icons';
-import { router } from "expo-router";
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
+import { useSelector } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 import { colors } from "../../colors";
+
 import Container from "../../components/lib/Container";
 import Header from "../../components/profile/Header";
 import ProfileView from "../../components/profile/ProfileView";
 import SignoutHandler from "../../components/profile/SignoutHandler";
 
-const ProfilePage = () => {
-    const [isOpen, setisOpen] = useState(false);
-    function handleModal() {
-        setisOpen(isOpen => !isOpen);
-    }
-    return (
-        <Container>
-            <Header />
-            <View style={Styles.container}>
+const Profile = () => {
+    const { user } = useSelector(state => state.user);
+    const [isOpen, setIsOpen] = useState(false);
+    const modalVisibilityHandler = () => setIsOpen(isOpen => !isOpen);
+    const name = user.firstname ? user.firstname : 'Complete Profile'
 
-                <View style={Styles.ProfileView}><ProfileView name='Sourik Bhuiya' email="sourikbhuiya@gmail.com" picture={require("../../public/dummy.jpeg")} /></View>
-
-                <TouchableOpacity
-                    label={'Your Profile'}
-                    onPress={() => router.push('/profile/details')}
-                    style={Styles.ActionButton}>
-                    <View style={Styles.leftpart}>
-                        <AntDesign name="profile" size={15} color="black" style={Styles.icon} />
-                        <Text style={Styles.buttonText}>Your Profile</Text>
-                    </View>
-                    <View style={Styles.rightpart}>
-                        <AntDesign name="right" size={20} color="grey" style={Styles.right} />
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity label={'Your Profile'} onPress={handleModal} style={Styles.ActionButton}>
-                    <View style={Styles.leftpart}>
-                        <AntDesign name="poweroff" size={15} color="black" style={Styles.icon} />
-                        <Text style={Styles.buttonText}>Sign Out</Text>
-                    </View>
-                    <View>
-                        <AntDesign name="right" size={20} color="grey" style={Styles.right} />
-                    </View>
-                </TouchableOpacity>
+    return (<Container>
+        <Header />
+        <View style={Styles.container}>
+            <View style={Styles.profileView}>
+                <ProfileView name={name} email={user.email} picture={user.image} />
             </View>
-            <SignoutHandler isOpen={isOpen} closeModalHandler={handleModal} />
-        </Container>
-    )
-
+            <TouchableOpacity
+                label={'Your Profile'}
+                onPress={() => router.push('/profile/details')}
+                style={Styles.actionButton}>
+                <View style={Styles.leftpart}>
+                    <AntDesign name="profile" size={15} color="black" style={Styles.icon} />
+                    <Text style={Styles.buttonText}>Your Profile</Text>
+                </View>
+                <View style={Styles.rightpart}>
+                    <AntDesign name="right" size={20} color="grey" style={Styles.right} />
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity label={'Your Profile'} onPress={modalVisibilityHandler} style={Styles.actionButton}>
+                <View style={Styles.leftpart}>
+                    <AntDesign name="poweroff" size={15} color="black" style={Styles.icon} />
+                    <Text style={Styles.buttonText}>Sign Out</Text>
+                </View>
+                <View>
+                    <AntDesign name="right" size={20} color="grey" style={Styles.right} />
+                </View>
+            </TouchableOpacity>
+        </View>
+        <SignoutHandler isOpen={isOpen} closeModalHandler={modalVisibilityHandler} />
+    </Container>)
 }
+
 const Styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
@@ -55,11 +56,9 @@ const Styles = StyleSheet.create({
     leftpart: {
         flexDirection: 'row'
     },
-
-    ProfileView: {
+    profileView: {
         marginVertical: 30
     },
-
     icon: {
         padding: 7,
         backgroundColor: colors.smoke,
@@ -68,7 +67,7 @@ const Styles = StyleSheet.create({
         width: 30,
         overflow: "hidden"
     },
-    ActionButton: {
+    actionButton: {
         backgroundColor: colors.primary,
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -83,7 +82,6 @@ const Styles = StyleSheet.create({
         textAlign: 'center',
         paddingHorizontal: 10
     }
-
-
 })
-export default ProfilePage
+
+export default Profile

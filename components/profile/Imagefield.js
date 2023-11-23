@@ -26,7 +26,7 @@ const Imagefield = ({ initialImage }) => {
         <View style={Styles.container}>
             <TouchableOpacity onPress={handleImagePress}>
                 <View style={Styles.imagecontainer}>
-                    <Image source={selectedImage} style={Styles.image} />
+                    <Image source={{ uri: selectedImage }} style={Styles.image} />
                 </View>
             </TouchableOpacity>
         </View>

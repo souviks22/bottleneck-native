@@ -5,7 +5,7 @@ const ProfileView = ({ name, email, picture }) => {
     return (
         <View style={Styles.container}>
             <View style={Styles.imagesection}>
-                <Image source={picture} style={Styles.image} />
+                <Image source={{ uri: picture }} style={Styles.image} />
             </View>
             <View style={Styles.textsection}>
                 <Text style={Styles.text}>{name}</Text>
@@ -28,9 +28,6 @@ const Styles = StyleSheet.create({
     imagesection: {
         width: 80,
         height: 80,
-        borderRadius: 40,
-        overflow: "hidden",
-        borderWidth: 2,
         alignItems: "center",
         marginVertical: 20,
         marginHorizontal: 10
