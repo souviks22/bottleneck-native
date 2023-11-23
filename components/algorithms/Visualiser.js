@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { View, ActivityIndicator, BackHandler } from "react-native"
-import { catchAsync } from "../../errors/async"
+import { useAsync } from "../../hooks/use-async"
 
 import YoutubeIframe from "react-native-youtube-iframe"
 import * as ScreenOrientation from "expo-screen-orientation"
@@ -8,6 +8,7 @@ import * as ScreenOrientation from "expo-screen-orientation"
 const { PORTRAIT, LANDSCAPE } = ScreenOrientation.OrientationLock
 
 const Visualiser = ({ id }) => {
+    const catchAsync = useAsync()
     const [state, setState] = useState()
     const [orientation, setOrientation] = useState(PORTRAIT)
     const orientationChangeHandler = catchAsync(async () => {

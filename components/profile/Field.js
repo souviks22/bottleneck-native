@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
         width: 'auto',
         alignItems: 'center',
         borderRadius: 10,
-        zIndex: 0
+        zIndex: 0,
+        backgroundColor:colors.primary
     },
     inputField: {
         height: 60,

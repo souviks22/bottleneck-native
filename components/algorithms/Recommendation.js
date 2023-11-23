@@ -3,11 +3,12 @@ import { Text, TouchableOpacity, StyleSheet } from "react-native"
 import { useRouter } from "expo-router"
 import { AntDesign } from "@expo/vector-icons"
 import { useHttp } from "../../hooks/use-http"
-import { catchAsync } from "../../errors/async"
+import { useAsync } from "../../hooks/use-async"
 import { colors } from "../../colors"
 
 const Recommendation = ({ algoId }) => {
     const router = useRouter()
+    const catchAsync = useAsync()
     const [algo, setAlgo] = useState({})
     const [httpRequest] = useHttp()
 

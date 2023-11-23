@@ -6,6 +6,7 @@ import { colors } from "../../colors";
 import Container from "../../components/lib/Container";
 import Header from "../../components/profile/Header";
 import ProfileView from "../../components/profile/ProfileView";
+import SignoutHandler from "../../components/profile/SignoutHandler";
 const ProfilePage = () => {
     const [isOpen, setisOpen] = useState(false);
     function handleModal() {
@@ -14,6 +15,7 @@ const ProfilePage = () => {
     }
     return (
         <Container>
+            <SignoutHandler />
             <Header />
             <View style={Styles.container}>
 

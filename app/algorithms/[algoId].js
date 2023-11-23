@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { useLocalSearchParams } from "expo-router"
 import { Entypo } from "@expo/vector-icons"
 import { useHttp } from "../../hooks/use-http"
-import { catchAsync } from "../../errors/async"
+import { useAsync } from "../../hooks/use-async"
 import { colors } from "../../colors"
 
 import Container from "../../components/lib/Container"
@@ -13,6 +13,7 @@ import Section from "../../components/algorithms/Section"
 import Recommendation from "../../components/algorithms/Recommendation"
 
 const Algorithm = () => {
+    const catchAsync = useAsync()
     const { algoId } = useLocalSearchParams()
     const [httpRequest, isLoading] = useHttp()
     const [algorithm, setAlgorithm] = useState({})

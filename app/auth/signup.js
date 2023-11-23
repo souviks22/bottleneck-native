@@ -2,7 +2,7 @@ import { useState } from "react"
 import { View, StyleSheet, ActivityIndicator } from "react-native"
 import { useNavigation } from "expo-router"
 import { useHttp } from "../../hooks/use-http"
-import { catchAsync } from "../../errors/async"
+import { useAsync } from "../../hooks/use-async"
 
 import Constants from "expo-constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -17,6 +17,7 @@ const { tokenKey, idKey } = Constants.expoConfig.extra
 
 const Signup = () => {
     const navigator = useNavigation()
+    const catchAsync = useAsync()
     const [httpRequest, isLoading] = useHttp()
     const [email, setEmail] = useState(), [password, setPassword] = useState()
     const emailChangeHandler = value => setEmail(value.trim())
