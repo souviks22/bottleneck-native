@@ -4,9 +4,16 @@ import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors } from '../../colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 const Fields = ({ label, DataType, iseditAble, value }) => {
-
+    const data =
+        [
+            { labels: "First Name", value: "firstname" },
+            { labels: "Last Name", value: "lastname" },
+            { labels: "Email", value: "email" },
+            { labels: "Phone Number", value: "phone" },
+            { labels: "Designation", value: "designation" },
+            { labels: "Organisation", value: "organization" }
+        ]
     const [editMode, seteditMode] = useState(false);
     const [fieldvalue, setfieldValue] = useState(value);
     const [selectedDate, setSelectedDate] = useState(new Date(value));
@@ -25,16 +32,28 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
     }
     const handleSave = () => {
         inputref.current.blur();
-    }
+        seteditMode(false);
+        const currentField = data.find(({ labels }) => labels === label);
+        if (currentField) {
+            const updatedValue = {
+                label: currentField.value,
+                value: fieldvalue,
+            };
+            console.log(updatedValue);
+        }
+    };
+
     const handleCancel = () => {
         inputref.current.blur();
+        seteditMode(false);
         setfieldValue(value);
     }
+
     return (
         <View style={styles.container}>
             {fieldvalue && <Text style={[styles.labelOnTop, editMode && styles.editModeinput]}>{label}</Text>}
-            <TouchableOpacity style={[styles.fields, editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}
-                onPress={!editMode ? handlefocus : handleBlur}>
+            <TouchableOpacity style={[styles.fields, iseditAble && editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}
+                onPress={!editMode ? handlefocus : handleBlur} disabled={!iseditAble || editMode ? true : false}>
 
                 <TextInput style={styles.inputField}
                     ref={inputref}
@@ -61,14 +80,14 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
                 )}
 
 
-                {editMode && DataType != 'date' && (
+                {iseditAble && editMode && DataType != 'date' && (
                     <View style={styles.action}>
-                        <Text style={styles.save} onPress={handleSave}>
+                        <TouchableOpacity style={styles.save} onPress={handleSave}>
                             <Feather name="save" size={24} color="black" />
-                        </Text>
-                        <Text style={styles.cancel} onPress={handleCancel}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.cancel} onPress={handleCancel}>
                             <MaterialIcons name="cancel" size={24} color="black" />
-                        </Text>
+                        </TouchableOpacity>
                     </View>
                 )
                 }
@@ -93,7 +112,7 @@ const styles = StyleSheet.create({
         color: colors.grey,
         backgroundColor: colors.smoke,
         padding: -5,
-        borderRadius:20
+        borderRadius: 20
     },
     fields: {
         flexDirection: 'row',
@@ -122,7 +141,8 @@ const styles = StyleSheet.create({
     },
     action: {
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        zIndex: 2
     },
     save: {
         padding: 5,
