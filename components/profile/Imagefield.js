@@ -1,57 +1,44 @@
+import { useState } from "react";
+import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { useAsync } from "../../hooks/use-async";
+
 import * as ImagePicker from "expo-image-picker";
-import React, { useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-const Imagefield = ({ initialImage }) => {
-    const [selectedImage, setSelectedImage] = useState(initialImage);
-    const handleImagePress = async () => {
-        try {
-            let result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
-                allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
-            });
 
-            console.log(result);
+const Imagefield = ({ image }) => {
+    const catchAsync = useAsync()
+    const [selectedImage, setSelectedImage] = useState(image)
 
-            if (!result.cancelled) {
-                setSelectedImage(result);
-            }
-        } catch (error) {
-            console.error('Error picking image:', error);
+    const handleImagePress = catchAsync(async () => {
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        })
+        if (!result.canceled) {
+            setSelectedImage(result)
         }
-    };
+    })
 
-    return (
-        <View style={Styles.container}>
-            <TouchableOpacity onPress={handleImagePress}>
-                <View style={Styles.imagecontainer}>
-                    <Image source={{ uri: selectedImage }} style={Styles.image} />
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
-
+    return (<View style={styles.container}>
+        <TouchableOpacity onPress={handleImagePress}>
+            <Image
+                source={{ uri: selectedImage }}
+                style={styles.image}
+            />
+        </TouchableOpacity>
+    </View>)
 }
-const Styles = StyleSheet.create({
+
+const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    imagecontainer: {
-        width: 150,
-        height: 150,
-        borderRadius: 75,
-        overflow: "hidden",
-        borderWidth: 2,
-        alignItems: "center"
+        alignItems: 'center',
+        paddingBottom: 40
     },
     image: {
-        width: "100%",
-        height: "100%",
-        borderRadius: 75
+        width: 150,
+        height: 150
     }
 })
-export default Imagefield;
+
+export default Imagefield

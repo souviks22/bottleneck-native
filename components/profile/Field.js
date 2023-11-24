@@ -1,151 +1,109 @@
-import { Feather, MaterialIcons } from '@expo/vector-icons';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colors } from '../../colors';
+import { useState, useRef } from "react"
+import { View, Text, TextInput, StyleSheet } from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import { Entypo, Feather } from "@expo/vector-icons"
+import { useAsync } from "../../hooks/use-async"
+import { useHttp } from "../../hooks/use-http"
+import { useDispatch, useSelector } from "react-redux"
+import { userActions } from "../../store/user-slice"
+import { colors } from "../../colors"
 
-import { useAsync } from '../../hooks/use-async';
-import { useHttp } from '../../hooks/use-http';
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../store/user-slice';
+const toDbField = label => {
+    const split = label.split(' ').map(word => word.toLowerCase())
+    return split.join('')
+}
 
+const Field = ({ label, dataType, isEditable, value }) => {
+    const inputRef = useRef()
+    const [isEditing, setIsEditing] = useState(false)
+    const [fieldValue, setFieldValue] = useState(value)
 
-const data = [
-    { labels: "First Name", value: "firstname" },
-    { labels: "Last Name", value: "lastname" },
-    { labels: "Email", value: "email" },
-    { labels: "Phone Number", value: "phone" },
-    { labels: "Designation", value: "designation" },
-    { labels: "Organisation", value: "organization" }
-]
+    const handleFocus = () => setIsEditing(true)
+    const handleBlur = () => setIsEditing(false)
 
-const Fields = ({ label, DataType, iseditAble, value }) => {
     const catchAsync = useAsync()
     const dispatch = useDispatch()
-    const [httpRequest, isLoading] = useHttp()
+    const [httpRequest] = useHttp()
     const { user } = useSelector(state => state.user)
 
-    const [editMode, seteditMode] = useState(false);
-    const [fieldvalue, setfieldValue] = useState(value);
-    const [selectedDate, setSelectedDate] = useState(new Date(value));
-
-    const inputref = useRef();
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    }
-
-    const handlefocus = () => {
-        seteditMode(true)
-    }
-    const handleBlur = () => {
-        seteditMode(false)
-    }
     const handleSave = catchAsync(async () => {
-        inputref.current.blur();
-        seteditMode(false);
-        const currentField = data.find(({ labels }) => labels === label);
-        if (currentField) {
-            const update = { [currentField.value]: fieldvalue }
-            const { user: updatedUser } = await httpRequest(`/users/${user._id}`, 'put', { update })
-            dispatch(userActions.changeUser({ ...user, ...updatedUser }))
-        }
+        inputRef.current.blur()
+        setIsEditing(false)
+        const update = { [toDbField(label)]: fieldValue }
+        const { user: updatedUser } = await httpRequest(`/users/${user._id}`, 'put', { update })
+        dispatch(userActions.changeUser({ ...updatedUser, token: user.token }))
     })
 
     const handleCancel = () => {
-        inputref.current.blur();
-        seteditMode(false);
-        setfieldValue(value);
+        inputRef.current.blur()
+        setIsEditing(false)
+        setFieldValue(value)
     }
 
-    return (
-        <View style={styles.container}>
-            {fieldvalue && <Text style={[styles.labelOnTop, editMode && styles.editModeinput]}>{label}</Text>}
-            <TouchableOpacity style={[styles.fields, iseditAble && editMode && styles.editModeinput, !iseditAble && styles.noneditAble]}
-                onPress={!editMode ? handlefocus : handleBlur} disabled={!iseditAble || editMode ? true : false}>
-
-                <TextInput style={styles.inputField}
-                    ref={inputref}
-                    placeholder={label}
-                    value={DataType === "date" ? selectedDate.toLocaleDateString() : fieldvalue}
-                    onChangeText={(text) => setfieldValue(text)}
-                    onFocus={handlefocus}
-                    keyboardType={DataType === 'number' ? 'number-pad' : 'default'}
-                    onBlur={handleBlur}
-                    selectionColor={DataType === "date" ? colors.primary : '#ff00ff'}
-                    editable={iseditAble}>
-                </TextInput>
-                {DataType === 'date' && editMode && (
-                    <RNDateTimePicker
-                        style={styles.inputField}
-                        value={selectedDate}
-                        onChange={(event, date) => {
-                            seteditMode(false);
-                            handleDateChange(date);
-                            inputref.current.blur();
-                        }}
-                        editable={iseditAble}
-                    />
-                )}
-
-
-                {iseditAble && editMode && DataType != 'date' && (
-                    <View style={styles.action}>
-                        <TouchableOpacity style={styles.save} onPress={handleSave}>
-                            <Feather name="save" size={24} color="black" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.cancel} onPress={handleCancel}>
-                            <MaterialIcons name="cancel" size={24} color="black" />
-                        </TouchableOpacity>
-                    </View>
-                )
-                }
-            </TouchableOpacity>
-            {!iseditAble && (
-                <Text style={styles.warning}>*This field can't be edited.</Text>
-            )}
-        </View>
-    )
-
+    return (<View style={styles.container}>
+        <Text style={[styles.labelOnTop, isEditing && styles.isEditinginput]}>{label}</Text>
+        <TouchableOpacity
+            style={[styles.field, isEditable && isEditing && styles.isEditinginput, !isEditable && styles.noneditAble]}
+            onPress={!isEditing ? handleFocus : handleBlur} disabled={!isEditable || isEditing ? true : false}
+        >
+            <TextInput style={styles.inputField}
+                ref={inputRef}
+                placeholder={label}
+                value={fieldValue}
+                onChangeText={(text) => setFieldValue(text)}
+                onFocus={handleFocus}
+                keyboardType={dataType === 'number' ? 'numeric' : 'default'}
+                onBlur={handleBlur}
+                editable={isEditable}>
+            </TextInput>
+            {isEditable && isEditing &&
+                <View style={styles.action}>
+                    <TouchableOpacity style={styles.save} onPress={handleSave}>
+                        <Feather name="check" size={20} color={colors.dark} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.cancel} onPress={handleCancel}>
+                        <Entypo name="cross" size={20} color={colors.dark} />
+                    </TouchableOpacity>
+                </View>
+            }
+        </TouchableOpacity>
+        {!isEditable && <Text style={styles.warning}>*This field can't be edited.</Text>}
+    </View>)
 }
+
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        position: 'relative'
+        paddingHorizontal: 15,
+        paddingVertical: 10
     },
     labelOnTop: {
         position: 'absolute',
-        left: 40,
-        zIndex: 1,
+        top: -2,
+        left: 30,
+        zIndex: 10,
         color: colors.grey,
         backgroundColor: colors.smoke,
-        padding: -5,
-        borderRadius: 20
+        paddingHorizontal: 5,
+        paddingVertical: 2,
+        borderRadius: 5
     },
-    fields: {
+    field: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height: 50,
-        borderColor: colors.grey,
-        borderWidth: 2,
-        marginBottom: 10,
-        paddingLeft: 8,
-        fontSize: 20,
-        width: 'auto',
         alignItems: 'center',
+        backgroundColor: colors.primary,
+        fontSize: 20,
+        borderWidth: 1.5,
         borderRadius: 10,
-        zIndex: 0,
-        backgroundColor: colors.primary
+        borderColor: colors.grey,
+        padding: 5,
     },
     inputField: {
-        height: 40,
-        width: 'auto',
-        fontSize: 20,
-        paddingLeft: 10
+        fontSize: 17,
+        paddingHorizontal: 10,
+        paddingVertical: 5
     },
-    editModeinput: {
+    isEditinginput: {
         borderColor: colors.black,
         color: colors.black
     },
@@ -167,10 +125,9 @@ const styles = StyleSheet.create({
     },
     warning: {
         color: colors.yellow,
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingTop: 5
     }
+})
 
-
-});
-
-export default Fields;
+export default Field
