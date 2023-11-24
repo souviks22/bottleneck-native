@@ -13,13 +13,13 @@ const Details = () => {
         <Imagefield image={user.image} />
         <ScrollView>
             <View style={styles.nameSection}>
-                <Field label='First Name' style={styles.share} isEditable={true} value={user.firstname || 'Not Set'} dataType='text' />
-                <Field label='Last Name' style={styles.share} isEditable={true} value={user.lastname || 'Not Set'} dataType='text' />
+                <Field label='First Name' style={styles.share} isEditable={true} value={user.firstname} dataType='text' />
+                <Field label='Last Name' style={styles.share} isEditable={true} value={user.lastname} dataType='text' />
             </View>
-            <Field label='Email' isEditable={false} value={user.email || 'Not Set'} dataType='text' />
-            <Field label='Phone' isEditable={true} value={user.phone || 'Not Set'} dataType='number' />
-            <Field label='Designation' isEditable={true} value={user.designation || 'Not Set'} dataType='text' />
-            <Field label='Organization' isEditable={true} value={user.organization || 'Not Set'} dataType='text' />
+            <Field label='Email' isEditable={false} value={user.email} dataType='text' />
+            <Field label='Phone' isEditable={true} value={user.phone} dataType='number' />
+            <Field label='Designation' isEditable={true} value={user.designation} dataType='text' />
+            <Field label='Organization' isEditable={true} value={user.organization} dataType='text' />
         </ScrollView>
     </Container>)
 }
