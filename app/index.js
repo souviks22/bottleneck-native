@@ -36,7 +36,7 @@ const Home = () => {
                 const { fields } = await getRequest('/fields')
                 setFields(fields)
             }
-            else router.replace('/profile')
+            else router.replace('/auth')
         })()
     }, [])
 
