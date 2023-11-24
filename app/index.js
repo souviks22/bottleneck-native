@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
-import { ScrollView, StyleSheet, ActivityIndicator } from "react-native"
 import { useRouter } from "expo-router"
+import { useEffect, useState } from "react"
+import { ActivityIndicator, ScrollView, StyleSheet } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { useAsync } from "../hooks/use-async"
 import { useHttp } from "../hooks/use-http"
@@ -8,10 +8,10 @@ import { userActions } from "../store/user-slice"
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import Constants from "expo-constants"
-import Container from "../components/lib/Container"
 import Header from "../components/home/Header"
 import Tab from "../components/home/Tab"
 import Tile from "../components/home/Tile"
+import Container from "../components/lib/Container"
 
 const { tokenKey, idKey } = Constants.expoConfig.extra
 
@@ -36,7 +36,7 @@ const Home = () => {
                 const { fields } = await getRequest('/fields')
                 setFields(fields)
             }
-            else router.replace('/auth')
+            else router.replace('/profile')
         })()
     }, [])
 

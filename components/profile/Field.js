@@ -1,12 +1,12 @@
-import { useState, useRef } from "react"
-import { View, Text, TextInput, StyleSheet } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
 import { Entypo, Feather } from "@expo/vector-icons"
+import { useRef, useState } from "react"
+import { StyleSheet, Text, TextInput, View } from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import { useDispatch, useSelector } from "react-redux"
+import { colors } from "../../colors"
 import { useAsync } from "../../hooks/use-async"
 import { useHttp } from "../../hooks/use-http"
-import { useDispatch, useSelector } from "react-redux"
 import { userActions } from "../../store/user-slice"
-import { colors } from "../../colors"
 
 const toDbField = label => {
     const split = label.split(' ').map(word => word.toLowerCase())
@@ -41,7 +41,7 @@ const Field = ({ label, dataType, isEditable, value }) => {
     }
 
     return (<View style={styles.container}>
-        <Text style={[styles.labelOnTop, isEditing && styles.isEditinginput]}>{label}</Text>
+        {fieldValue && <Text style={[styles.labelOnTop, isEditing && styles.isEditinginput]}>{label}</Text>}
         <TouchableOpacity
             style={[styles.field, isEditable && isEditing && styles.isEditinginput, !isEditable && styles.noneditAble]}
             onPress={!isEditing ? handleFocus : handleBlur} disabled={!isEditable || isEditing ? true : false}
