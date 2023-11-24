@@ -4,16 +4,28 @@ import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors } from '../../colors';
+
+import { useAsync } from '../../hooks/use-async';
+import { useHttp } from '../../hooks/use-http';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../store/user-slice';
+
+
+const data = [
+    { labels: "First Name", value: "firstname" },
+    { labels: "Last Name", value: "lastname" },
+    { labels: "Email", value: "email" },
+    { labels: "Phone Number", value: "phone" },
+    { labels: "Designation", value: "designation" },
+    { labels: "Organisation", value: "organization" }
+]
+
 const Fields = ({ label, DataType, iseditAble, value }) => {
-    const data =
-        [
-            { labels: "First Name", value: "firstname" },
-            { labels: "Last Name", value: "lastname" },
-            { labels: "Email", value: "email" },
-            { labels: "Phone Number", value: "phone" },
-            { labels: "Designation", value: "designation" },
-            { labels: "Organisation", value: "organization" }
-        ]
+    const catchAsync = useAsync()
+    const dispatch = useDispatch()
+    const [httpRequest, isLoading] = useHttp()
+    const { user } = useSelector(state => state.user)
+
     const [editMode, seteditMode] = useState(false);
     const [fieldvalue, setfieldValue] = useState(value);
     const [selectedDate, setSelectedDate] = useState(new Date(value));
@@ -30,18 +42,16 @@ const Fields = ({ label, DataType, iseditAble, value }) => {
     const handleBlur = () => {
         seteditMode(false)
     }
-    const handleSave = () => {
+    const handleSave = catchAsync(async () => {
         inputref.current.blur();
         seteditMode(false);
         const currentField = data.find(({ labels }) => labels === label);
         if (currentField) {
-            const updatedValue = {
-                label: currentField.value,
-                value: fieldvalue,
-            };
-            console.log(updatedValue);
+            const update = { [currentField.value]: fieldvalue }
+            const { user: updatedUser } = await httpRequest(`/users/${user._id}`, 'put', { update })
+            dispatch(userActions.changeUser({ ...user, ...updatedUser }))
         }
-    };
+    })
 
     const handleCancel = () => {
         inputref.current.blur();
